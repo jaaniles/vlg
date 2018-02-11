@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
+    public bool allowTargetingColors;
     public Material collectingMaterial;
     public Material targetedMaterial;
     public int timeToCollect = 1;
@@ -19,6 +20,19 @@ public class Resource : MonoBehaviour
 
     void Update()
     {
+        if (allowTargetingColors)
+        {
+            HandleColor();
+        }
+    }
+    public virtual void Collect()
+    {
+        gameObject.SetActive(false);
+        Destroy(gameObject, 5);
+    }
+
+    private void HandleColor()
+    {
         if (isBeingCollected)
         {
             gameObject.GetComponent<Renderer>().material = collectingMaterial;
@@ -27,10 +41,5 @@ public class Resource : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material = targetedMaterial;
         }
-    }
-    public virtual void Collect()
-    {
-        gameObject.SetActive(false);
-        Destroy(gameObject, 5);
     }
 }

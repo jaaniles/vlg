@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
 
     public float moveSpeed;
-    public Text statusText;
+    public TextMeshProUGUI statusText;
     public LayerMask mask;
     private Vector3 moveInput;
     private Vector3 moveVelocity;
