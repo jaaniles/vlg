@@ -4,29 +4,30 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
-
+using System.Linq;
 public class PlayerController : MonoBehaviour
 {
-
+    public int inventorySpace = 5;
     public float moveSpeed;
+    public Transform target;
+    public GameObject interactingTarget;
     public TextMeshProUGUI statusText;
-    public LayerMask mask;
     private Vector3 moveInput;
     private Vector3 moveVelocity;
-    private Transform target;
-    public Collider[] colliders;
+    private WorkerInventory inventory;
+    private float collectProgress;
 
     void Start()
     {
+        inventory = GetComponent<WorkerInventory>();
         statusText.text = "";
     }
 
     void FixedUpdate()
     {
-        if (!target || !target.gameObject.activeSelf)
+        if (!target)
         {
-            SetNewTarget();
-            return;
+            DetermineNextTask();
         }
 
         MoveTowardsTarget(target);
@@ -40,7 +41,6 @@ public class PlayerController : MonoBehaviour
         }
 
         FaceTarget();
-        Resource resource = target.gameObject.GetComponent<Resource>();
 
         float step = moveSpeed * Time.deltaTime;
         if (!target.GetComponent<Collider>().bounds.Contains(transform.position))
@@ -49,57 +49,119 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void DetermineNextTask()
     {
-        if (target && target.gameObject == other.gameObject && other.gameObject.CompareTag("Resource"))
+        if (inventory.GetInventoryItemsAmount() >= inventorySpace)
         {
-            Resource resource = other.gameObject.GetComponent<Resource>();
-            if (!resource.isBeingCollected)
-            {
-                StartCoroutine(Collect(other.gameObject));
-            }
+            GoToClosestStockpile();
+        }
+        else
+        {
+            GetClosestResource();
         }
     }
-
     void OnTriggerStay(Collider other)
     {
-        if (target && target.gameObject == other.gameObject && other.gameObject.CompareTag("Resource"))
+        if (target && target.gameObject == other.gameObject)
         {
-            Resource resource = other.gameObject.GetComponent<Resource>();
-            if (!resource.isBeingCollected)
+            switch (other.gameObject.tag)
             {
-                StartCoroutine(Collect(other.gameObject));
+                case "Resource":
+                    HandleResourceCollect(other.gameObject);
+                    break;
+                case "Stockpile":
+                    HandleStockpileLogic(other.gameObject);
+                    break;
+                default:
+                    break;
             }
         }
     }
-
-    private IEnumerator Collect(GameObject collectable)
+    private void HandleResourceCollect(GameObject res)
     {
-        Resource resource = collectable.GetComponent<Resource>();
+        SetStatusText("Collecting...");
+        Resource resource = res.GetComponent<Resource>();
         WorkerInventory inventory = GetComponent<WorkerInventory>();
 
-        resource.isBeingCollected = true;
-        SetStatusText("Collecting...");
-        yield return new WaitForSeconds(resource.timeToCollect);
-        SetStatusText("");
+        int harvestedAmount = resource.Collect();
 
-        inventory.AddResource(resource.resourceType, resource.yieldAmount);
-        resource.Collect();
+        if (harvestedAmount == -1)
+        {
+            SetStatusText("");
+            StopFollowingTarget();
+            return;
+        }
+
+        inventory.AddResource(resource.resourceType, harvestedAmount);
+    }
+    private void HandleStockpileLogic(GameObject stockpile)
+    {
+        WorkerInventory inventory = GetComponent<WorkerInventory>();
+        WorkerInventory stockpileInventory = stockpile.GetComponent<WorkerInventory>();
+
+        Debug.Log("Handle stockpile logic");
+
+        // Loop each resource and their amounts to Stockpile inventory
+        foreach (KeyValuePair<ResourceTypes.Types, int> entry in inventory.resourceInventory)
+        {
+            stockpileInventory.AddResource(entry.Key, entry.Value);
+        }
+
+        inventory.ResetResourceInventory();
+
         StopFollowingTarget();
     }
-
-    private void SetNewTarget()
+    private void GoToClosestStockpile()
     {
-        colliders = Physics.OverlapSphere(GetComponent<Collider>().bounds.center, int.MaxValue, mask);
-        Transform closestTarget = Utilities.GetClosestTarget(colliders, transform.position);
+        LayerMask mask = LayerMask.GetMask("Stockpile");
+        Collider[] stockpiles = Physics.OverlapSphere(GetComponent<Collider>().bounds.center, int.MaxValue, mask);
+        Transform closestStockpile = GetClosest(stockpiles);
 
-        if (!closestTarget || target)
+        if (!closestStockpile)
+        {
+            Debug.Log("No closest stockpile!");
+            return;
+        }
+
+        FollowTarget(closestStockpile);
+    }
+
+    private void GetClosestResource()
+    {
+        LayerMask mask = LayerMask.GetMask("Resources");
+        Collider[] resources = Physics.OverlapSphere(GetComponent<Collider>().bounds.center, int.MaxValue, mask);
+        Collider[] filteredResources = Utilities.FilterResourcesByTargetedStatus(resources);
+        Transform closestResource = GetClosest(filteredResources);
+
+        if (!closestResource)
         {
             return;
         }
 
-        FollowTarget(closestTarget);
-        target.gameObject.GetComponent<Resource>().isTargeted = true;
+        SetNewResourceTarget(closestResource);
+    }
+
+    private void SetNewResourceTarget(Transform target)
+    {
+        FollowTarget(target);
+
+        Resource resource = target.gameObject.GetComponent<Resource>();
+
+        if (resource)
+        {
+            resource.isTargeted = true;
+        }
+    }
+    private Transform GetClosest(Collider[] colliders)
+    {
+        Transform closestTarget = Utilities.GetClosestTarget(colliders, transform.position);
+
+        if (!closestTarget)
+        {
+            return null;
+        }
+
+        return closestTarget;
     }
 
     private void FollowTarget(Transform targetToFollow)

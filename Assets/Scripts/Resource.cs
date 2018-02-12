@@ -1,22 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Resource : MonoBehaviour
 {
     public bool allowTargetingColors;
-    public Material collectingMaterial;
     public Material targetedMaterial;
-    public int timeToCollect = 1;
     public bool isTargeted = false;
-    public bool isBeingCollected = false;
     public ResourceTypes.Types resourceType;
-    public int yieldAmount = 1;
-
-    void Start()
-    {
-        gameObject.name = "Resource: " + Random.Range(0, 100000).ToString();
-    }
+    public int yieldMultiplier = 1;
+    public float materialAmount = 10;
+    private float harvestProgress;
 
     void Update()
     {
@@ -25,19 +20,34 @@ public class Resource : MonoBehaviour
             HandleColor();
         }
     }
-    public virtual void Collect()
+    public virtual int Collect()
     {
-        gameObject.SetActive(false);
-        Destroy(gameObject, 5);
-    }
+        // TODO: Add equipment etc modifiers
+        float harvestAmount = 1 * Time.deltaTime;
+        materialAmount -= harvestAmount;
 
+        if (materialAmount <= 0)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject, 5);
+
+            return -1; // Resource is now depleted
+        }
+
+        harvestProgress += harvestAmount;
+        if (harvestProgress >= 0.99) // Hack, but makes sure player gets all of materialAmount
+        {
+            harvestProgress = 0;
+            return 1 * yieldMultiplier;
+        }
+        else
+        {
+            return 0;
+        }
+    }
     private void HandleColor()
     {
-        if (isBeingCollected)
-        {
-            gameObject.GetComponent<Renderer>().material = collectingMaterial;
-        }
-        else if (isTargeted)
+        if (isTargeted)
         {
             gameObject.GetComponent<Renderer>().material = targetedMaterial;
         }

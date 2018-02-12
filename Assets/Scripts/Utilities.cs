@@ -14,9 +14,8 @@ public class Utilities : ScriptableObject
         foreach (Collider potentialTarget in colliders)
         {
             GameObject potentialGameObject = potentialTarget.gameObject;
-            Resource resource = potentialGameObject.GetComponent<Resource>();
 
-            if (!potentialGameObject.activeSelf || !resource || resource.isTargeted == true)
+            if (!potentialGameObject.activeSelf)
             {
                 continue;
             }
@@ -34,9 +33,26 @@ public class Utilities : ScriptableObject
         return closestTarget;
     }
 
+    public static Collider[] FilterResourcesByTargetedStatus(Collider[] resources)
+    {
+        List<Collider> filteredList = new List<Collider>();
+        for (int i = 0; i < resources.Length; i++)
+        {
+            Resource resource = resources[i].GetComponent<Resource>();
+            if (!resource.isTargeted) filteredList.Add(resources[i]);
+        }
+        return filteredList.ToArray();
+    }
+
     public static IEnumerable<T> GetEnumValues<T>()
     {
         return Enum.GetValues(typeof(T)).Cast<T>();
     }
 
+    public static Vector3 RandomZRotation(Transform what)
+    {
+        Vector3 euler = what.eulerAngles;
+        euler.z = UnityEngine.Random.Range(0f, 360f);
+        return euler;
+    }
 }
