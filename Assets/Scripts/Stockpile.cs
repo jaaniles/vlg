@@ -7,7 +7,7 @@ public class Stockpile : MonoBehaviour
     private WorkerInventory inventory;
     void Start()
     {
-        inventory = GetComponent<WorkerInventory>();
+        //inventory = GetComponent<WorkerInventory>();
     }
     void OnTriggerEnter(Collider other)
     {

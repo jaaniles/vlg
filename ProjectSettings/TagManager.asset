@@ -8,6 +8,7 @@ TagManager:
   - ResourceSpawner
   - Stockpile
   - Worker
+  - QuestGiver
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Resources
   - Stockpile
-  - 
+  - QuestGiver
   - 
   - 
   - 
