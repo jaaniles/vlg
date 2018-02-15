@@ -2,24 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class Resource : MonoBehaviour
 {
+<<<<<<< Updated upstream:Assets/Scripts/Resource.cs
     public bool allowTargetingColors;
     public Material targetedMaterial;
+=======
+    public TextMeshProUGUI materialAmountText;
+    public float radius = 3f;
+>>>>>>> Stashed changes:Assets/Scripts/Resource/Resource.cs
     public bool isTargeted = false;
     public ResourceTypes.Types resourceType;
     public int yieldMultiplier = 1;
     public float materialAmount = 10;
+    public float maxMaterialAmount = 25;
+    public float growMultiplier = 0.1f;
     private float harvestProgress;
 
-    void Update()
+    void FixedUpdate()
     {
-        if (allowTargetingColors)
+        materialAmountText.text = Math.Floor(materialAmount).ToString();
+
+        if (growMultiplier > 0)
         {
-            HandleColor();
+            Grow();
         }
     }
+
+    private void Grow()
+    {
+        materialAmount += growMultiplier * Time.deltaTime;
+    }
+
     public virtual int Collect()
     {
         // TODO: Add equipment etc modifiers
@@ -45,11 +61,31 @@ public class Resource : MonoBehaviour
             return 0;
         }
     }
+<<<<<<< Updated upstream:Assets/Scripts/Resource.cs
     private void HandleColor()
     {
         if (isTargeted)
         {
             gameObject.GetComponent<Renderer>().material = targetedMaterial;
         }
+=======
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, new Vector3(radius, transform.lossyScale.y, radius));
+    }
+
+    public static Transform GetClosestResource(GameObject fromWho, ResourceTypes.Types resourceType)
+    {
+        Vector3 center = fromWho.GetComponent<Collider>().bounds.center;
+        LayerMask mask = LayerMask.GetMask("Resources");
+
+        Collider[] overlappingResources = Physics.OverlapSphere(center, float.MaxValue, mask);
+        Collider[] validResources = Utilities.FilterResources(overlappingResources, resourceType);
+        Transform closestValidResource = Utilities.GetClosestTarget(validResources, fromWho.transform.position);
+
+        return closestValidResource;
+>>>>>>> Stashed changes:Assets/Scripts/Resource/Resource.cs
     }
 }

@@ -33,14 +33,36 @@ public class Utilities : ScriptableObject
         return closestTarget;
     }
 
+<<<<<<< Updated upstream:Assets/Scripts/Utilities.cs
     public static Collider[] FilterResourcesByTargetedStatus(Collider[] resources)
+=======
+    public static WorkerController GetWorkerController(GameObject go)
+    {
+        WorkerController worker = go.GetComponent<WorkerController>();
+
+        if (worker == null)
+        {
+            Debug.LogWarning("Failed to find Worker-component in worker");
+            return null;
+        }
+
+        return worker;
+    }
+
+    public static Collider[] FilterResources(Collider[] resources, ResourceTypes.Types resourceType)
+>>>>>>> Stashed changes:Assets/Scripts/Helpers/Utilities.cs
     {
         List<Collider> filteredList = new List<Collider>();
         for (int i = 0; i < resources.Length; i++)
         {
             Resource resource = resources[i].GetComponent<Resource>();
-            if (!resource.isTargeted) filteredList.Add(resources[i]);
+
+            if (resource.isTargeted == false && resource.resourceType == resourceType)
+            {
+                filteredList.Add(resources[i]);
+            }
         }
+
         return filteredList.ToArray();
     }
 

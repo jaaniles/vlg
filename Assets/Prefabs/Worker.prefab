@@ -56,9 +56,20 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
   - component: {fileID: 4196159646660986}
   - component: {fileID: 33306189590904178}
   - component: {fileID: 23524277753899840}
+=======
+  - component: {fileID: 4843135162484622}
+  - component: {fileID: 33147505459586032}
+  - component: {fileID: 23701364513842272}
+  - component: {fileID: 195024469515390300}
+  - component: {fileID: 54632579483394530}
+  - component: {fileID: 65060317512269492}
+  - component: {fileID: 114172260117219370}
+  - component: {fileID: 114250151736427634}
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
   m_Layer: 0
   m_Name: Pointer
   m_TagString: Untagged
@@ -100,7 +111,40 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
 --- !u!4 &4196159646660986
+=======
+--- !u!1 &1753555030570148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4166743664746256}
+  - component: {fileID: 108915504724213698}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4166743664746256
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1753555030570148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4843135162484622}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4572620670803720
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,6 +162,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
   m_GameObject: {fileID: 1458936880330316}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.03, y: 0.82, z: 0.26}
@@ -125,6 +170,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 224850805139760970}
   m_RootOrder: 1
+=======
+  m_GameObject: {fileID: 1225511515699664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02, y: 1, z: -14.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4661151551499592}
+  - {fileID: 4572620670803720}
+  - {fileID: 224816584653787272}
+  - {fileID: 4166743664746256}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23333713732454212
 MeshRenderer:
@@ -264,6 +322,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
   m_GameObject: {fileID: 1708506587625546}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -274,6 +333,52 @@ MonoBehaviour:
     m_keys: 
     m_values: 
 --- !u!114 &114302353448506060
+=======
+  m_GameObject: {fileID: 1064527131672498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!108 &108915504724213698
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1753555030570148}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 0.9485294, g: 0.6083671, b: 0, a: 1}
+  m_Intensity: 3.07
+  m_Range: 3.49
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0.1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &114172260117219370
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -284,12 +389,18 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
 --- !u!114 &114698247920433708
+=======
+  scanDistance: 15
+  statusText: {fileID: 114295638305789946}
+--- !u!114 &114250151736427634
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -297,7 +408,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1708506587625546}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
   m_Script: {fileID: 11500000, guid: bbca2935eebe71e47bd80316fb14a5d1, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: 9007e0e91c6f60e468bf33b83fae066c, type: 3}
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySpace: 5
@@ -324,7 +439,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Placeholder
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 33db60c37b63f08448ded4b385e74e38, type: 2}
@@ -390,14 +505,19 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
     textComponent: {fileID: 114717393494899764}
     characterCount: 11
+=======
+    textComponent: {fileID: 114295638305789946}
+    characterCount: 0
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -435,8 +555,28 @@ CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream:Assets/Prefabs/Worker.prefab
   m_GameObject: {fileID: 1708506587625546}
 --- !u!222 &222923831172072474
+=======
+  m_GameObject: {fileID: 1225511515699664}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 30
+  avoidancePriority: 50
+  m_AngularSpeed: 300
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
+--- !u!222 &222402484320453778
+>>>>>>> Stashed changes:Assets/Prefabs/Worker 2.0.prefab
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

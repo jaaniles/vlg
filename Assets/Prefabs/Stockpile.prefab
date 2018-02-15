@@ -39,8 +39,8 @@ GameObject:
   - component: {fileID: 205789688749432518}
   - component: {fileID: 54670072006742586}
   - component: {fileID: 65907943441798552}
-  - component: {fileID: 114189132510102592}
   - component: {fileID: 114643705119543422}
+  - component: {fileID: 114329926524899376}
   m_Layer: 9
   m_Name: Stockpile
   m_TagString: Stockpile
@@ -215,7 +215,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -0.5, y: 0.5, z: -0.5}
---- !u!114 &114189132510102592
+--- !u!114 &114329926524899376
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -223,9 +223,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1693690919068552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2ee4f2ac2872d409d777ea3e8e885a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9007e0e91c6f60e468bf33b83fae066c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceInventory:
+    m_keys: 
+    m_values: 
 --- !u!114 &114643705119543422
 MonoBehaviour:
   m_ObjectHideFlags: 1

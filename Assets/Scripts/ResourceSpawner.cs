@@ -7,9 +7,9 @@ public class ResourceSpawner : MonoBehaviour
 
     public GameObject resource;
     public static HashSet<GameObject> resources = new HashSet<GameObject>();
+    public bool continousSpawning;
     public int timeBetweenSpawn;
     public int maxResources;
-    // Use this for initialization
     void Start()
     {
         if (maxResources < 1)
@@ -22,7 +22,10 @@ public class ResourceSpawner : MonoBehaviour
             SpawnResource();
         }
 
-        InvokeRepeating("SpawnResource", timeBetweenSpawn, timeBetweenSpawn);
+        if (continousSpawning == true)
+        {
+            InvokeRepeating("SpawnResource", timeBetweenSpawn, timeBetweenSpawn);
+        }
     }
 
     private void SpawnResource()

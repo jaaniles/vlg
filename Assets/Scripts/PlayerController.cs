@@ -14,12 +14,12 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI statusText;
     private Vector3 moveInput;
     private Vector3 moveVelocity;
-    private WorkerInventory inventory;
+    private ResourceInventory inventory;
     private float collectProgress;
 
     void Start()
     {
-        inventory = GetComponent<WorkerInventory>();
+        inventory = GetComponent<ResourceInventory>();
         statusText.text = "";
     }
 
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         SetStatusText("Collecting...");
         Resource resource = res.GetComponent<Resource>();
-        WorkerInventory inventory = GetComponent<WorkerInventory>();
+        ResourceInventory inventory = GetComponent<ResourceInventory>();
 
         int harvestedAmount = resource.Collect();
 
@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
     }
     private void HandleStockpileLogic(GameObject stockpile)
     {
-        WorkerInventory inventory = GetComponent<WorkerInventory>();
-        WorkerInventory stockpileInventory = stockpile.GetComponent<WorkerInventory>();
+        ResourceInventory inventory = GetComponent<ResourceInventory>();
+        ResourceInventory stockpileInventory = stockpile.GetComponent<ResourceInventory>();
 
         Debug.Log("Handle stockpile logic");
 
