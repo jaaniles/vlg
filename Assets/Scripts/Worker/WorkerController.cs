@@ -12,7 +12,6 @@ public class WorkerController : MonoBehaviour
     public IBehaviour<GameObject> task;
     public IBehaviour<GameObject> idleTask;
     private NavMeshAgent agent;
-    public TextMeshProUGUI statusText;
     private float radius = 3f;
 
     void Start()
@@ -99,6 +98,6 @@ public class WorkerController : MonoBehaviour
 
     public void SetStatusText(string text)
     {
-        statusText.text = text;
+        //statusText.text = text;
     }
 }

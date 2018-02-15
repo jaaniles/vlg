@@ -26,6 +26,8 @@ public class QuestGenerator : MonoBehaviour
             questSteps.Add(new GatherResource(entry.Key, entry.Value));
         }
 
+        questSteps.Add(new GoToQuestGiver());
+
         return questSteps;
     }
 }

@@ -20,7 +20,14 @@ public class MoveToSafety : IBehaviour<GameObject>
 
         if (!target)
         {
-            target = GetClosestSafezone(self);
+            Transform safezone = GetClosestSafezone(self);
+
+            if (safezone == null) // No safezone, no run 
+            {
+                return true;
+            }
+
+            target = safezone;
         }
 
         bool inRange = Behaviours.MoveToTarget(self, target);
@@ -34,7 +41,7 @@ public class MoveToSafety : IBehaviour<GameObject>
         WorkerController worker = self.GetComponent<WorkerController>();
         if (worker == null)
         {
-            Debug.LogWarning("No workerController found in Worker!!");
+            Debug.LogWarning("No workerController found in Worker!");
             return false;
         }
 

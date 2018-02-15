@@ -33,9 +33,6 @@ public class Utilities : ScriptableObject
         return closestTarget;
     }
 
-<<<<<<< Updated upstream:Assets/Scripts/Utilities.cs
-    public static Collider[] FilterResourcesByTargetedStatus(Collider[] resources)
-=======
     public static WorkerController GetWorkerController(GameObject go)
     {
         WorkerController worker = go.GetComponent<WorkerController>();
@@ -50,7 +47,6 @@ public class Utilities : ScriptableObject
     }
 
     public static Collider[] FilterResources(Collider[] resources, ResourceTypes.Types resourceType)
->>>>>>> Stashed changes:Assets/Scripts/Helpers/Utilities.cs
     {
         List<Collider> filteredList = new List<Collider>();
         for (int i = 0; i < resources.Length; i++)
@@ -76,5 +72,14 @@ public class Utilities : ScriptableObject
         Vector3 euler = what.eulerAngles;
         euler.z = UnityEngine.Random.Range(0f, 360f);
         return euler;
+    }
+
+    public static Transform GetClosestQuestGiver(GameObject self)
+    {
+        LayerMask mask = LayerMask.GetMask("QuestGiver");
+        Collider[] questGivers = Physics.OverlapSphere(self.GetComponent<Collider>().bounds.center, int.MaxValue, mask);
+        Transform closestQuestGiver = Utilities.GetClosestTarget(questGivers, self.transform.position);
+
+        return closestQuestGiver;
     }
 }

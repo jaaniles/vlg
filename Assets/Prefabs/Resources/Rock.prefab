@@ -203,7 +203,7 @@ MonoBehaviour:
   isTargeted: 0
   resourceType: 1
   yieldMultiplier: 1
-  materialAmount: 5
+  materialAmount: 15
   maxMaterialAmount: 25
   growMultiplier: 0
 --- !u!114 &114889060462878180

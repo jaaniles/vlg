@@ -6,13 +6,8 @@ using TMPro;
 
 public class Resource : MonoBehaviour
 {
-<<<<<<< Updated upstream:Assets/Scripts/Resource.cs
-    public bool allowTargetingColors;
-    public Material targetedMaterial;
-=======
     public TextMeshProUGUI materialAmountText;
     public float radius = 3f;
->>>>>>> Stashed changes:Assets/Scripts/Resource/Resource.cs
     public bool isTargeted = false;
     public ResourceTypes.Types resourceType;
     public int yieldMultiplier = 1;
@@ -61,14 +56,6 @@ public class Resource : MonoBehaviour
             return 0;
         }
     }
-<<<<<<< Updated upstream:Assets/Scripts/Resource.cs
-    private void HandleColor()
-    {
-        if (isTargeted)
-        {
-            gameObject.GetComponent<Renderer>().material = targetedMaterial;
-        }
-=======
 
     void OnDrawGizmosSelected()
     {
@@ -86,6 +73,5 @@ public class Resource : MonoBehaviour
         Transform closestValidResource = Utilities.GetClosestTarget(validResources, fromWho.transform.position);
 
         return closestValidResource;
->>>>>>> Stashed changes:Assets/Scripts/Resource/Resource.cs
     }
 }
